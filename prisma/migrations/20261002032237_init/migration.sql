@@ -1,0 +1,27 @@
+-- CreateEnum
+CREATE TYPE "Provider" AS ENUM ('LOCAL', 'GOOGLE');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT,
+    "firstName" TEXT,
+    "lastName" TEXT,
+    "picture" TEXT,
+    "googleId" TEXT,
+    "provider" "Provider" NOT NULL DEFAULT 'LOCAL',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_googleId_key" ON "User"("googleId");
+
+-- CreateIndex
+CREATE INDEX "User_googleId_idx" ON "User"("googleId");
